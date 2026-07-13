@@ -1,15 +1,25 @@
 /* src/layouts/AppShell.module.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
 :root {
-  --side-bg: #0b1329;
+  --side-bg: #0d1b26;
+  --side-bg-raised: #0a151e;
   --side-bg-hover: rgba(255, 255, 255, 0.04);
-  --side-bg-active: #1c2541;
-  --side-accent: #3a86ff;
-  --side-text: #94a3b8;
-  --side-text-light: #f8fafc;
+  --side-bg-active: #132a32;
+  --side-accent: #12857a;
+  --side-accent-light: #1eb3a4;
+  --side-amber: #e8a33d;
+  --side-green: #4c9a6a;
+  --side-text: #7c8b94;
+  --side-text-dim: #4d5a62;
+  --side-text-light: #eaf6f4;
   --header-bg: #ffffff;
-  --content-bg: #f8fafc;
-  --border-color: #e2e8f0;
+  --content-bg: #f6f8f7;
+  --border-color: #e2e8e6;
+  --font-brand: 'Space Grotesk', sans-serif;
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-data: 'IBM Plex Mono', monospace;
 }
 
 .shell {
@@ -18,10 +28,10 @@
   width: 100vw;
   overflow: hidden;
   background: var(--content-bg);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-ui);
 }
 
-/* ── Professional Sidebar Container ── */
+/* ── Sidebar Container ── */
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -30,22 +40,31 @@
   transition: width 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
   position: relative;
   z-index: 20;
 }
 
-.open .sidebar { width: 260px; }
+.open .sidebar { width: 264px; }
 .collapsed .sidebar { width: 68px; }
 
-/* Institutional Brand Segment */
+/* Topographic contour texture, etched faintly into the sidebar */
+.contourLayer {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Brand Segment */
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 20px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(0, 0, 0, 0.12);
+  padding: 20px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  z-index: 1;
   flex-shrink: 0;
 }
 
@@ -53,13 +72,12 @@
   flex-shrink: 0;
   width: 36px;
   height: 36px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, var(--side-accent) 0%, #00b4d8 100%);
+  border-radius: 9px;
+  background: var(--side-accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
+  color: var(--side-text-light);
 }
 
 .brandText {
@@ -69,55 +87,71 @@
 }
 
 .brandTitle {
+  font-family: var(--font-brand);
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--side-text-light);
   white-space: nowrap;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
 }
 
 .brandSub {
   font-size: 10px;
-  color: #00b4d8;
-  font-weight: 600;
-  letter-spacing: 0.8px;
+  color: var(--side-green);
+  font-weight: 500;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
-/* Operational Status Pill */
+/* Live Telemetry Indicator — animated flow line instead of a static dot */
 .liveIndicator {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin: 14px 14px 6px;
-  padding: 8px 12px;
-  background: rgba(34, 197, 94, 0.05);
-  border: 1px solid rgba(34, 197, 94, 0.15);
+  gap: 9px;
+  margin: 14px 16px 6px;
+  padding: 8px 11px;
+  background: rgba(76, 154, 106, 0.08);
+  border: 1px solid rgba(76, 154, 106, 0.2);
   border-radius: 6px;
+  position: relative;
+  z-index: 1;
 }
 
-.liveDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 8px #22c55e;
+.liveWave {
+  flex-shrink: 0;
+  color: var(--side-green);
+}
+
+.liveWavePath {
+  stroke-dasharray: 20;
+  animation: flow 1.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liveWavePath { animation: none; }
+}
+
+@keyframes flow {
+  to { stroke-dashoffset: -40; }
 }
 
 .liveText {
-  font-size: 11px;
-  font-weight: 600;
-  color: #4ade80;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--side-green);
+  font-family: var(--font-data);
   white-space: nowrap;
 }
 
-/* Main Scannable Navigation */
+/* Navigation */
 .nav {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 8px 0;
+  position: relative;
+  z-index: 1;
 }
 
 .nav::-webkit-scrollbar { width: 4px; }
@@ -154,15 +188,16 @@
   font-weight: 500;
 }
 
+/* Signature: a rising water-level bar rather than a flat accent line */
 .navItem.active::after {
   content: '';
   position: absolute;
   right: 0;
-  top: 12px;
-  bottom: 12px;
+  top: 18px;
+  bottom: 8px;
   width: 3px;
-  background: var(--side-accent);
-  border-radius: 4px 0 0 4px;
+  background: linear-gradient(180deg, var(--side-accent-light), var(--side-accent));
+  border-radius: 2px 0 0 2px;
 }
 
 .navIcon {
@@ -172,13 +207,13 @@
   width: 24px;
   height: 24px;
   flex-shrink: 0;
-  color: var(--side-text);
+  color: var(--side-text-dim);
   transition: color 0.15s ease;
 }
 
 .navItem:hover .navIcon,
 .navItem.active .navIcon {
-  color: var(--side-accent);
+  color: var(--side-accent-light);
 }
 
 .iconSvg {
@@ -191,20 +226,21 @@
   display: flex;
   align-items: center;
   transition: transform 0.2s ease;
+  color: var(--side-text-dim);
 }
 
 .chevronOpen {
   transform: rotate(180deg);
-  color: var(--side-accent);
+  color: var(--side-accent-light);
 }
 
-/* Child Link Sub-menus */
+/* Child Sub-menus */
 .navChildren {
   overflow: hidden;
   transition: max-height 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
-  background: rgba(0, 0, 0, 0.15);
+  background: var(--side-bg-raised);
   border-radius: 6px;
   margin: 2px 10px;
   padding: 4px 0;
@@ -238,7 +274,7 @@
 }
 
 .navChildItem:hover::before {
-  background: var(--side-accent);
+  background: var(--side-accent-light);
 }
 
 .navChildItem.activeChild {
@@ -247,33 +283,34 @@
 }
 
 .navChildItem.activeChild::before {
-  background: var(--side-accent);
-  box-shadow: 0 0 8px var(--side-accent);
+  background: var(--side-accent-light);
 }
 
-/* Profile Identity Footer Segment */
+/* Profile Footer — hexagonal survey-marker avatar */
 .userSection {
-  padding: 14px;
-  background: rgba(0, 0, 0, 0.2);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 14px 16px;
+  background: var(--side-bg-raised);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .userAvatar {
   width: 32px;
   height: 32px;
-  border-radius: 6px;
-  background: linear-gradient(135deg, var(--side-bg-active), var(--side-accent));
+  flex-shrink: 0;
+  background: var(--side-accent);
+  clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--side-text-light);
 }
 
 .userInfo {
@@ -316,7 +353,7 @@
   color: #fff;
 }
 
-/* ── Content Structural Layout ── */
+/* ── Content Layout ── */
 .main {
   flex: 1;
   display: flex;
@@ -336,21 +373,22 @@
 }
 
 .pageTitle {
+  font-family: var(--font-brand);
   font-size: 15px;
   font-weight: 600;
-  color: #0f172a;
+  color: #0d1b26;
   margin: 0;
   display: flex;
   align-items: center;
 }
 
 .pageTitleParent {
-  color: #64748b;
-  font-weight: 400;
+  color: #7c8b94;
+  font-weight: 500;
 }
 
 .pageTitleSep {
-  color: #cbd5e1;
+  color: #cbd5d3;
   margin: 0 6px;
 }
 
@@ -362,7 +400,7 @@
 
 .langSwitch {
   display: flex;
-  background: #f1f5f9;
+  background: #eef2f1;
   border-radius: 6px;
   padding: 2px;
 }
@@ -375,7 +413,7 @@
   background: transparent;
   border-radius: 4px;
   cursor: pointer;
-  color: #475569;
+  color: #55625f;
   transition: all 0.15s ease;
 }
 
@@ -401,9 +439,9 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #f1f5f9;
+  background: #eef2f1;
   border: 1px solid var(--border-color);
-  color: #475569;
+  color: #55625f;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -420,5 +458,5 @@
   flex: 1;
   overflow-y: auto;
   padding: 24px;
-  background: #f8fafc;
+  background: var(--content-bg);
 }

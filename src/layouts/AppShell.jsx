@@ -5,29 +5,48 @@ import { MODULES } from '@/config'
 import { useStore } from '@/store'
 import styles from './AppShell.module.css'
 
-// Premium Inline SVGs replacing system emojis
+// Icon set redrawn around the subject: gauges, water, terrain — not a
+// generic dashboard kit. Same call signature as before, drop-in swap.
 const SidebarIcons = ({ name }) => {
   const icons = {
-    dashboard: <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />,
-    settings: <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />,
-    history: <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />,
-    layers: <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />,
-    trending: <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />,
-    bell: <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />,
-    map: <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />,
-    activity: <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" />,
+    // Basin dashboard — a gauge dial with a needle
+    dashboard: <><path d="M12 12l4.2-4.2M12 20a8 8 0 10-8-8" /><path d="M4 12a8 8 0 018-8" strokeDasharray="2 3" /></>,
+    // Gauge management — a stopcock / valve wheel
+    settings: <><circle cx="12" cy="12" r="3.2" /><path d="M12 3v3.6M12 17.4V21M21 12h-3.6M6.6 12H3M18.4 5.6l-2.5 2.5M8.1 15.9l-2.5 2.5M18.4 18.4l-2.5-2.5M8.1 8.1L5.6 5.6" /></>,
+    // Historical data — a river-stage timeline
+    history: <><path d="M3 18c3-5 5 5 8 0s5-5 8 0" /><path d="M3 9c3-5 5 5 8 0s5-5 8 0" opacity="0.4" /></>,
+    // Impact forecast — layered terrain contours
+    layers: <><path d="M3 17l9-4 9 4-9 4-9-4z" /><path d="M3 11l9-4 9 4" opacity="0.55" /></>,
+    // Forecast & discharge — an upward hydrograph
+    trending: <><path d="M3 17l5-5 4 4 8-9" /><path d="M15 7h5v5" /></>,
+    bell: <path d="M18 16v-5a6 6 0 00-4.5-5.8V4a1.5 1.5 0 00-3 0v1.2A6 6 0 006 11v5l-2 2.5h16L18 16zM10 20.5a2 2 0 004 0" />,
+    // Flood map — a topographic pin
+    map: <><path d="M12 21s-6.5-6.1-6.5-11A6.5 6.5 0 1118.5 10c0 4.9-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.2" /></>,
+    // Reservoir anomaly — a pulse across a waterline
+    activity: <path d="M2 12h4l2-6 3 12 3-9 2 3h6" />,
     terminal: <path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />,
     users: <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />,
-    cloud: <path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />,
+    // Hydromet — rain falling from a cloud
+    cloud: <><path d="M6.5 17a4 4 0 01.5-8 5 5 0 019.6-1.5A4.5 4.5 0 0118 17H6.5z" /><path d="M8 20l1-2M12 20l1-2M16 20l1-2" opacity="0.6" /></>,
     cpu: <path d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 5h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2z" />,
     file: <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
   }
   return (
-    <svg className={styles.iconSvg} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <svg className={styles.iconSvg} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
       {icons[name] || <path d="M4 6h16M4 12h16M4 18h16" />}
     </svg>
   )
 }
+
+// Faint contour-line texture etched into the sidebar background
+const ContourTexture = () => (
+  <svg className={styles.contourLayer} viewBox="0 0 264 800" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M-20,70 Q66,20 140,70 T300,70" stroke="currentColor" strokeWidth="1" fill="none" />
+    <path d="M-20,130 Q76,80 150,130 T310,130" stroke="currentColor" strokeWidth="1" fill="none" />
+    <path d="M-20,560 Q66,610 140,560 T300,560" stroke="currentColor" strokeWidth="1" fill="none" />
+    <path d="M-20,620 Q76,670 150,620 T310,620" stroke="currentColor" strokeWidth="1" fill="none" />
+  </svg>
+)
 
 export default function AppShell() {
   const { i18n } = useTranslation()
@@ -82,16 +101,16 @@ export default function AppShell() {
 
   return (
     <div className={`${styles.shell} ${sidebarOpen ? styles.open : styles.collapsed}`}>
-      
-      {/* ── Sidebar Component ── */}
+
+      {/* ── Sidebar ── */}
       <aside className={styles.sidebar}>
-        
-        {/* Header/Brand Section */}
+        <ContourTexture />
+
+        {/* Brand */}
         <div className={styles.brand}>
           <div className={styles.logoWrap}>
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} width="20" height="20">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 13.5a3 3 0 100-6 3 3 0 000 6z" />
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} width="19" height="19" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2C12 2 5 11 5 15a7 7 0 0014 0c0-4-7-13-7-13z" />
             </svg>
           </div>
           {sidebarOpen && (
@@ -102,15 +121,17 @@ export default function AppShell() {
           )}
         </div>
 
-        {/* Dynamic Telemetry Status */}
+        {/* Live telemetry — an animated flow line, not a static dot */}
         {sidebarOpen && (
           <div className={styles.liveIndicator}>
-            <span className={styles.liveDot} />
-            <span className={styles.liveText}>Network Active • 47 Stations Online</span>
+            <svg className={styles.liveWave} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
+              <path className={styles.liveWavePath} d="M2 12c3-6 5 6 8 0s5-6 8 0 5-6 4 0" />
+            </svg>
+            <span className={styles.liveText}>47 stations online</span>
           </div>
         )}
 
-        {/* System Module Actions Navigation */}
+        {/* Navigation */}
         <nav className={styles.nav}>
           {MODULES.map((mod) => {
             const hasChildren = Array.isArray(mod.children) && mod.children.length > 0
@@ -174,7 +195,7 @@ export default function AppShell() {
           })}
         </nav>
 
-        {/* Footer Configuration / Identity Profile */}
+        {/* Footer — hexagonal survey-marker avatar */}
         <div className={styles.userSection}>
           <div className={styles.userAvatar}>{initials}</div>
           {sidebarOpen && (
@@ -193,7 +214,7 @@ export default function AppShell() {
         </div>
       </aside>
 
-      {/* ── Context View Framework ── */}
+      {/* ── Content ── */}
       <div className={styles.main}>
         <header className={styles.header}>
           <div className={styles.headerLeft}>
