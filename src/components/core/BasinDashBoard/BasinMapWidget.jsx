@@ -148,7 +148,7 @@ const BasinMapWidget = memo(
         <div className="relative h-[440px] w-full max-w-full bg-slate-100 flex-1">
           <MapContainer
             center={SL_CENTER}
-            zoom={6.4}
+            zoom={7}
             minZoom={6}
             maxZoom={11}
             maxBounds={SL_BOUNDS}

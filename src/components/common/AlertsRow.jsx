@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback, memo } from "react";
 import { GAUGE_DATA } from "@/modules/basin-dashboard/data";
 import { Button } from "@/components/ui/button";
 import BaseDialog from "@/components/ui/BaseDialog";
+import { AlertCircle, Clock, MapPin, ChevronRight } from "lucide-react";
 
 const AlertsRow = memo(({ alerts = [], filterBasin }) => {
   const [activeModalAlert, setActiveModalAlert] = useState(null);
@@ -20,7 +21,8 @@ const AlertsRow = memo(({ alerts = [], filterBasin }) => {
       return {
         badge: "bg-rose-500 text-white",
         text: "text-rose-600",
-        border: "border-rose-100 hover:border-rose-200",
+        border: "border-rose-100 hover:border-rose-200 hover:bg-rose-50/20",
+        indicator: "bg-rose-500",
         glow: "shadow-rose-100/30",
         modalAccent: "border-l-4 border-l-rose-500",
       };
@@ -29,7 +31,9 @@ const AlertsRow = memo(({ alerts = [], filterBasin }) => {
       return {
         badge: "bg-orange-500 text-white",
         text: "text-orange-600",
-        border: "border-orange-100 hover:border-orange-200",
+        border:
+          "border-orange-100 hover:border-orange-200 hover:bg-orange-50/20",
+        indicator: "bg-orange-500",
         glow: "shadow-orange-100/30",
         modalAccent: "border-l-4 border-l-orange-500",
       };
@@ -37,7 +41,8 @@ const AlertsRow = memo(({ alerts = [], filterBasin }) => {
     return {
       badge: "bg-amber-500 text-white",
       text: "text-amber-600",
-      border: "border-amber-100 hover:border-amber-200",
+      border: "border-amber-100 hover:border-amber-200 hover:bg-amber-50/20",
+      indicator: "bg-amber-500",
       glow: "shadow-amber-100/30",
       modalAccent: "border-l-4 border-l-amber-500",
     };
@@ -53,19 +58,20 @@ const AlertsRow = memo(({ alerts = [], filterBasin }) => {
   if (!alerts.length) return null;
 
   return (
-    <div className="w-full max-w-full overflow-hidden">
+    <div className="w-full max-w-full overflow-hidden flex flex-col">
       {/* Header Log Summary */}
-      <div className="flex items-center gap-3 mb-3 select-none">
-        <span className="text-sm font-bold text-slate-900 tracking-tight">
+      <div className="flex items-center justify-between gap-3 mb-2.5 select-none shrink-0">
+        <span className="text-xs font-black uppercase tracking-wider text-slate-400 font-mono flex items-center gap-1.5">
+          <AlertCircle className="w-3.5 h-3.5 text-slate-400 stroke-[2.2]" />
           Active Incident Log
         </span>
-        <span className="text-xs font-black px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-100">
-          {alerts.length} Active
+        <span className="text-[11px] font-black px-2 py-0.5 rounded-md bg-rose-50 text-rose-600 border border-rose-100 shadow-xs">
+          {filtered.length} Active
         </span>
       </div>
 
-      {/* Horizontal Carousel Track */}
-      <div className="flex gap-4 overflow-x-auto pb-3 pt-0.5 px-0.5 snap-x snap-mandatory [-webkit-overflow-scrolling:touch] scrollbar-none w-full max-w-full">
+      {/* Clean Vertical Operational Stack Track Feed */}
+      <div className="w-full max-h-[210px] overflow-y-auto pr-1 space-y-2 scrollbar-thin divide-y divide-transparent">
         {filtered.map((a) => {
           const cardStyles = getSeverityStyles(a.severity);
 
@@ -73,39 +79,53 @@ const AlertsRow = memo(({ alerts = [], filterBasin }) => {
             <div
               key={a.id}
               onClick={() => setActiveModalAlert(a)}
-              className={`flex-[0_0_300px] snap-start bg-white rounded-2xl p-4 border shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer ${cardStyles.border} ${cardStyles.glow} hover:scale-[1.01]`}
+              className={`w-full bg-slate-50/50 hover:bg-white rounded-xl p-3 border shadow-xs transition-all duration-150 cursor-pointer flex items-center justify-between gap-4 ${cardStyles.border}`}
             >
-              <div className="flex justify-between items-center mb-2.5">
-                <span
-                  className={`text-[11px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md ${cardStyles.badge}`}
-                >
-                  {a.type}
-                </span>
-                <span className="text-xs text-slate-400 font-medium">
-                  ⏱ {a.time}
-                </span>
+              {/* Left-aligned content node */}
+              <div className="min-w-0 flex-1 space-y-1">
+                <div className="flex items-center gap-2 flex-wrap">
+                  {/* Small Live Indicator Dot instead of huge colorful badge badges */}
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full shrink-0 ${cardStyles.indicator}`}
+                  />
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono">
+                    {a.type}
+                  </span>
+                  <span
+                    className={`text-[10px] font-black px-1.5 py-0.2 rounded uppercase ${cardStyles.badge} text-[9px]`}
+                  >
+                    {a.severity}
+                  </span>
+                </div>
+
+                {/* Primary Alert Subject */}
+                <div className="text-xs font-bold text-slate-900 truncate tracking-tight pr-2">
+                  {a.title}
+                </div>
+
+                {/* Micro Meta Summary Info */}
+                <div className="flex items-center gap-3 text-[11px] text-slate-400 font-medium">
+                  <span className="flex items-center gap-0.5 truncate max-w-[140px]">
+                    <MapPin className="w-3 h-3 shrink-0 text-slate-300" />
+                    {a.loc}
+                  </span>
+                  <span className="flex items-center gap-0.5 shrink-0 font-mono font-semibold">
+                    <Clock className="w-3 h-3 shrink-0 text-slate-300" />
+                    {a.clock}
+                  </span>
+                </div>
               </div>
 
-              <div className="flex justify-between items-center mb-1.5 text-xs font-bold">
-                <span className={cardStyles.text}>⚠️ {a.severity}</span>
-                <span className="text-slate-400 font-mono font-medium">
-                  {a.clock}
-                </span>
-              </div>
-
-              <div className="text-sm font-bold text-slate-900 mb-1 truncate tracking-tight">
-                {a.title}
-              </div>
-
-              <div className="text-xs text-slate-500 font-medium truncate">
-                📍 {a.loc}
+              {/* Minimal right-aligned action arrow */}
+              <div className="shrink-0 text-slate-300 group-hover:text-slate-500 transition-colors">
+                <ChevronRight className="w-4 h-4 stroke-[2.5]" />
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* ── Reusable Component Mapping ── */}
+      {/* ── Reusable Modal Base Layer Mapping ── */}
       <BaseDialog
         isOpen={activeModalAlert !== null}
         onClose={handleClose}
