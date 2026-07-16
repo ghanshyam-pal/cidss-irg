@@ -22,17 +22,17 @@ export const ALERT_STATUS = {
 // ─── Gauges (Merged with extended geographical/sensor data) ───────────────────
 export const GAUGE_DATA = [
   { id: 'G01', name: 'Kalu Ganga – Millakanda',    basin: 'Kalu',       subbasin: 'Upper Kalu',    type: 'river',  lat: 6.533, lng: 80.133, level: 4.82, threshold: 4.5,  status: 'MAJOR_FLOOD', trend: '↑', rain24h: 88 },
-  { id: 'G02', name: 'Kelani River – Hanwella',     basin: 'Kelani',     subbasin: 'Lower Kelani',  type: 'river',  lat: 6.902, lng: 80.082, level: 3.21, threshold: 3.8,  status: 'ALERT',       trend: '↑', rain24h: 45 },
+  { id: 'G02', name: 'Kelani  – Hanwella',     basin: 'Kelani',     subbasin: 'Lower Kelani',  type: 'river',  lat: 6.902, lng: 80.082, level: 3.21, threshold: 3.8,  status: 'ALERT',       trend: '↑', rain24h: 45 },
   { id: 'G03', name: 'Mahaweli – Manampitiya',      basin: 'Mahaweli',   subbasin: 'Middle Mahaweli',type:'river',  lat: 7.888, lng: 81.098, level: 2.10, threshold: 4.2,  status: 'NORMAL',      trend: '→', rain24h: 12 },
   { id: 'G04', name: 'Gin Ganga – Baddegama',       basin: 'Gin',        subbasin: 'Lower Gin',     type: 'river',  lat: 6.183, lng: 80.183, level: 1.95, threshold: 3.5,  status: 'NORMAL',      trend: '↓', rain24h: 20 },
   { id: 'G05', name: 'Nilwala – Pitabeddara',       basin: 'Nilwala',    subbasin: 'Upper Nilwala', type: 'river',  lat: 5.983, lng: 80.533, level: 3.78, threshold: 3.5,  status: 'MINOR_FLOOD', trend: '↑', rain24h: 62 },
   { id: 'G06', name: 'Attanagalu – Horombawa',      basin: 'Attanagalu', subbasin: 'Lower Attanagalu',type:'river', lat: 7.133, lng: 80.016, level: 2.45, threshold: 3.0,  status: 'NORMAL',      trend: '→', rain24h: 18 },
   { id: 'G07', name: 'Deduru Oya – Dambulla',       basin: 'Deduru',     subbasin: 'Upper Deduru',  type: 'river',  lat: 7.866, lng: 80.649, level: 0.88, threshold: 2.8,  status: 'NORMAL',      trend: '↓', rain24h: 5  },
   { id: 'G08', name: 'Walawe – Embilipitiya',       basin: 'Walawe',     subbasin: 'Upper Walawe',  type: 'river',  lat: 6.333, lng: 80.850, level: 5.10, threshold: 4.5,  status: 'MAJOR_FLOOD', trend: '↑', rain24h: 95 },
-  { id: 'R01', name: 'Kotmale Rain Gauge',           basin: 'Mahaweli',   subbasin: 'Upper Mahaweli',type: 'rain',   lat: 6.998, lng: 80.633, level: null, threshold: null, status: 'NORMAL',      trend: '→', rain24h: 38 },
-  { id: 'R02', name: 'Ratnapura Rain Gauge',         basin: 'Kalu',       subbasin: 'Upper Kalu',    type: 'rain',   lat: 6.683, lng: 80.400, level: null, threshold: null, status: 'ALERT',       trend: '↑', rain24h: 110},
-  { id: 'RS01',name: 'Kotmale Reservoir',            basin: 'Mahaweli',   subbasin: 'Upper Mahaweli',type: 'reservoir',lat:6.998,lng:80.633,  level: 3.21,  threshold: 3.8,   status: 'ALERT',       trend: '↑', rain24h: null},
-  { id: 'RS02',name: 'Victoria Reservoir',           basin: 'Mahaweli',   subbasin: 'Middle Mahaweli',type:'reservoir',lat:7.216,lng:80.783, level: 2.10,  threshold: 4.2,   status: 'NORMAL',      trend: '→', rain24h: null},
+  { id: 'R01', name: 'Kotmale ',           basin: 'Mahaweli',   subbasin: 'Upper Mahaweli',type: 'rain',   lat: 6.998, lng: 80.633, level: null, threshold: null, status: 'NORMAL',      trend: '→', rain24h: 38 },
+  { id: 'R02', name: 'Ratnapura ',         basin: 'Kalu',       subbasin: 'Upper Kalu',    type: 'rain',   lat: 6.683, lng: 80.400, level: null, threshold: null, status: 'ALERT',       trend: '↑', rain24h: 110},
+  { id: 'RS01',name: 'Kotmale ',            basin: 'Mahaweli',   subbasin: 'Upper Mahaweli',type: 'reservoir',lat:6.998,lng:80.633,  level: 3.21,  threshold: 3.8,   status: 'ALERT',       trend: '↑', rain24h: null},
+  { id: 'RS02',name: 'Victoria ',           basin: 'Mahaweli',   subbasin: 'Middle Mahaweli',type:'reservoir',lat:7.216,lng:80.783, level: 2.10,  threshold: 4.2,   status: 'NORMAL',      trend: '→', rain24h: null},
 ]
 
 // ─── Multi-location alerts ────────────────────────────────────────────────────

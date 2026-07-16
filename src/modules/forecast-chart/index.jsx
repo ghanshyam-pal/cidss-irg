@@ -124,13 +124,13 @@ export default function ForecastPage() {
 
         <div style={{ width: 1, height: 26, background: '#e2e8f0' }} />
         <span style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '.04em' }}>Zoom</span>
-        {ZOOM_OPTIONS.map((z) => (
+        {/* {ZOOM_OPTIONS.map((z) => (
           <button key={z} onClick={() => setZoomHrs(z)} style={toggleBtn(zoomHrs === z)}>{z}h window</button>
-        ))}
+        ))} */}
 
         <div style={{ width: 1, height: 26, background: '#e2e8f0' }} />
-        <button onClick={() => setShowInnerBand((v) => !v)} style={toggleBtn(showInnerBand)}>P25–P75 band</button>
-        <button onClick={() => setShowSpaghetti((v) => !v)} style={toggleBtn(showSpaghetti)}>Spaghetti ({N_MEMBERS} members)</button>
+        {/* <button onClick={() => setShowInnerBand((v) => !v)} style={toggleBtn(showInnerBand)}>P25–P75 band</button>
+        <button onClick={() => setShowSpaghetti((v) => !v)} style={toggleBtn(showSpaghetti)}>Spaghetti ({N_MEMBERS} members)</button> */}
 
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 8, alignItems: 'center' }}>
           <span style={{ fontSize: 11, color: '#94a3b8' }}>Model run</span>

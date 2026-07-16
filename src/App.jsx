@@ -23,6 +23,8 @@ const FleetOperation = lazy(
 const ReservoirMgmt = lazy(() => import("./modules/reservoir/reservoirMgmt"));
 const HistoricalData = lazy(() => import("./modules/HistoricalData/index"));
 const ImpactForecast = lazy(() => import("./modules/ImpactForecast/index"));
+const DataEntry         = lazy(() => import('./modules/HistoricalData/DataEntry')) 
+
 
 export default function App() {
   return (
@@ -59,6 +61,11 @@ export default function App() {
               path="historical-data/history"
               element={<HistoricalData />}
             />
+            <Route
+              path="historical-data/data-entry"
+              element={<DataEntry />}
+            />
+            
             <Route path="impact-forecast/impact" element={<ImpactForecast />} />
             <Route
               path="reservoir-anomaly-map/mgmt"

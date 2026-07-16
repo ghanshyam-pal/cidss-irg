@@ -19,7 +19,7 @@ export const MODULES = [
     children: [
       { id: 'm5-overview', label: 'Overview', path: '/basin-dashboard/overview' },
       { id: 'm5-river',    label: 'River Gauges', path: '/basin-dashboard/river-gauges' },
-      { id: 'm5-rain',     label: 'Rain Gauges', path: '/basin-dashboard/rain-gauges' },
+      // { id: 'm5-rain',     label: 'Rain Gauges', path: '/basin-dashboard/rain-gauges' },
     ],
   },
   {
@@ -28,6 +28,8 @@ export const MODULES = [
     icon: 'settings',
     children: [
       { id: 'm11-fleet', label: 'Fleet Operation', path: '/gauge-management/fleet-operation' },
+      { id: 'm12-fleet', label: 'Data Entry', path: '/historical-data/data-entry' },
+
     ],
   },
   {
