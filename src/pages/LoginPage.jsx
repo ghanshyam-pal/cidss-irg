@@ -1,14 +1,8 @@
-import {
-  Droplets,
-  CloudRain,
-  Waves,
-  ShieldCheck,
-} from "lucide-react";
+import { Droplets, CloudRain, Waves, ShieldCheck } from "lucide-react";
 // import sl_logo from "../../sl.png"
-import sl_logo from "../data/images/sl_logo1.png"
+import sl_logo from "../data/images/sl_logo1.png";
 
 import RainEffect from "./RainEffect";
-import "./LoginPage.css";
 
 export default function LoginPage() {
   return (
@@ -20,20 +14,16 @@ export default function LoginPage() {
         <div className="overlay"></div>
 
         <div className="hero-content">
-          <img
-            src={sl_logo}
-            alt="Sri Lanka Emblem"
-            className="emblem"
-          />
+          <img src={sl_logo} alt="Sri Lanka Emblem" className="emblem" />
 
           <h1>
-            Co-production of Impact-based  
+            Co-production of Impact-based
             <span>Decision Support System</span>
           </h1>
 
           <p>
-            Department of Irrigation - Democratic Socialist
-            Republic of Sri Lanka
+            Department of Irrigation - Democratic Socialist Republic of Sri
+            Lanka
           </p>
 
           <div className="stats">
@@ -79,32 +69,20 @@ export default function LoginPage() {
       {/* LOGIN SECTION */}
       <div className="login-section">
         <div className="login-card">
-          <ShieldCheck
-            className="login-icon"
-            size={50}
-          />
+          <ShieldCheck className="login-icon" size={50} />
 
           <h2>Welcome Back</h2>
-          <p>
-            Sign in to access hydrological monitoring
-            services
-          </p>
+          <p>Sign in to access hydrological monitoring services</p>
 
           <form>
             <div className="input-group">
               <label>Username</label>
-              <input
-                type="text"
-                placeholder="Enter username"
-              />
+              <input type="text" placeholder="Enter username" />
             </div>
 
             <div className="input-group">
               <label>Password</label>
-              <input
-                type="password"
-                placeholder="Enter password"
-              />
+              <input type="password" placeholder="Enter password" />
             </div>
 
             <div className="options">
@@ -116,9 +94,7 @@ export default function LoginPage() {
               <a href="#">Forgot Password?</a>
             </div>
 
-            <button type="submit">
-              Login
-            </button>
+            <button type="submit">Login</button>
           </form>
 
           <div className="footer-text">

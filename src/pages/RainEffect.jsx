@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import "./RainEffect.css";
 
 export default function RainEffect() {
   const drops = useMemo(() => {
