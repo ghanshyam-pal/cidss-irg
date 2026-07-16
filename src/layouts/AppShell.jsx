@@ -122,14 +122,14 @@ export default function AppShell() {
         </div>
 
         {/* Live telemetry — an animated flow line, not a static dot */}
-        {sidebarOpen && (
+        {/* {sidebarOpen && (
           <div className={styles.liveIndicator}>
             <svg className={styles.liveWave} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
               <path className={styles.liveWavePath} d="M2 12c3-6 5 6 8 0s5-6 8 0 5-6 4 0" />
             </svg>
             <span className={styles.liveText}>47 stations online</span>
           </div>
-        )}
+        )} */}
 
         {/* Navigation */}
         <nav className={styles.nav}>
