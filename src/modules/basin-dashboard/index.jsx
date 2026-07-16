@@ -222,7 +222,7 @@ export default function Dashboard() {
         {/* Core Layout Grid Block — Instantly displays map above the page fold */}
         <div className="grid grid-cols-1 lg:grid-cols-[clamp(450px,58%,920px)_1fr] gap-6 items-start w-full max-w-full">
           {/* Left Hand Hydrological Anchor Map */}
-          <div className="h-full rounded-2xl bg-white p-0.5 border border-slate-100/90 shadow-sm shadow-slate-200/40 overflow-hidden">
+          <div className="h-[52rem] rounded-2xl bg-white p-0.5 border border-slate-100/90 shadow-sm shadow-slate-200/40 overflow-hidden">
             <BasinMapWidget
               mapMode={mapMode}
               setMapMode={setMapMode}
