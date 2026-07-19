@@ -28,7 +28,7 @@ const DataEntry         = lazy(() => import('./modules/HistoricalData/DataEntry'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/irg">
       <Suspense fallback={<PageLoader />}>
         <Routes>
           {/* Public */}
